@@ -1,24 +1,24 @@
-import React from "react";
+import { useHistory } from "react-router-dom";
+
 import IllustrationImg from "../assets/images/illustration.svg";
 import logoImg from "../assets/images/logo.svg";
 import googleIconImg from "../assets/images/google-icon.svg";
-import "../styles/auth.scss";
 import { Button } from "../components/Button";
-import { useHistory } from "react-router-dom";
-import { auth, firebase } from "../services/firebase";
+import "../styles/auth.scss";
+
+import { useAuth } from "../hooks/useAuth";
 
 export function Home(): JSX.Element {
-  // const history = useHistory();
+  const history = useHistory();
 
-  const handleCreateRoom = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then((teste) => {
-        console.log(teste);
-      });
-    // history.push("/rooms/new");
+  const { user, signInWithGoogle } = useAuth();
+
+  //FUnção que verifica se o usuário está logado e redireciona para pagina de criação de salas
+  const handleCreateRoom = async () => {
+    if (!user) {
+      await signInWithGoogle();
+    }
+    history.push("/rooms/new");
   };
 
   return (
