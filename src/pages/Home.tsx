@@ -7,6 +7,7 @@ import { Button } from "../components/Button";
 import "../styles/auth.scss";
 
 import { useAuth } from "../hooks/useAuth";
+import { FormEvent } from "react";
 
 export function Home(): JSX.Element {
   const history = useHistory();
@@ -20,6 +21,11 @@ export function Home(): JSX.Element {
     }
     history.push("/rooms/new");
   };
+
+
+  const handleJoinRoom = async (event: FormEvent) =>{
+    event.preventDefault();
+  }
 
   return (
     <div id="page-auth">
@@ -39,7 +45,7 @@ export function Home(): JSX.Element {
             Crie sua sala com o Google
           </button>
           <div className="separator">ou entre em uma sala</div>
-          <form>
+          <form onSubmit={handleJoinRoom}>
             <input type="text" placeholder="Digite o código da sala" />
             <Button type="submit">Entrar na sala</Button>
           </form>
