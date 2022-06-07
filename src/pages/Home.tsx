@@ -12,7 +12,7 @@ import { database } from "../services/firebase";
 
 export function Home(): JSX.Element {
   const history = useHistory();
-  const [roomCode, setRoomCode] = useState<string>('');
+  const [roomCode, setRoomCode] = useState<string>("");
   const { user, signInWithGoogle } = useAuth();
 
   //FUnção que verifica se o usuário está logado e redireciona para pagina de criação de salas
@@ -23,26 +23,27 @@ export function Home(): JSX.Element {
     history.push("/rooms/new");
   };
 
-
-  const handleJoinRoom = async (event: FormEvent) =>{
+  const handleJoinRoom = async (event: FormEvent) => {
     event.preventDefault();
-    
+
     const roomRef = await database.ref(`rooms/${roomCode}`).get();
 
-    if(!roomRef.exists()){
-      alert('Room does not exists. ')
+    if (!roomRef.exists()) {
+      alert("Room does not exists. ");
       return;
     }
 
-    if(roomRef.val().closedAt){
-      alert('Room already closed. ')
+    if (roomRef.val().closedAt) {
+      alert("Room already closed. ");
       return;
     }
-    console.log(roomRef.toJSON());
 
-    history.push(`/rooms/${roomCode}`);
-    
-  }
+    if (roomRef.val().authorId === user?.id) {
+      history.push(`/admin/rooms/${roomCode}`);
+    } else {
+      history.push(`/rooms/${roomCode}`);
+    }
+  };
 
   return (
     <div id="page-auth">
@@ -63,10 +64,10 @@ export function Home(): JSX.Element {
           </button>
           <div className="separator">ou entre em uma sala</div>
           <form onSubmit={handleJoinRoom}>
-            <input 
-              type="text" 
-              placeholder="Digite o código da sala" 
-              onChange={event => setRoomCode(event.target.value)}
+            <input
+              type="text"
+              placeholder="Digite o código da sala"
+              onChange={(event) => setRoomCode(event.target.value)}
               value={roomCode}
             />
             <Button type="submit">Entrar na sala</Button>
