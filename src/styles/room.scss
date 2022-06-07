@@ -13,6 +13,15 @@
       > img {
         max-height: 45px;
       }
+
+      > div {
+        display: flex;
+        gap: 16px;
+        
+        button {
+          height: 40px;
+        }
+      }
     }
   }
   main {
@@ -62,7 +71,7 @@
         .user-info {
           display: flex;
           align-items: center;
-          
+
           img {
             width: 32px;
             height: 32px;

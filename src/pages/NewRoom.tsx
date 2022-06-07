@@ -30,7 +30,7 @@ export function NewRoom(): JSX.Element {
       authorId: user?.id,
     });
      
-    history.push(`/rooms/${firebaseRooms.key}`)
+    history.push(`/admin/rooms/${firebaseRooms.key}`)
 
   };
 

@@ -33,6 +33,11 @@ export function Home(): JSX.Element {
       alert('Room does not exists. ')
       return;
     }
+
+    if(roomRef.val().closedAt){
+      alert('Room already closed. ')
+      return;
+    }
     console.log(roomRef.toJSON());
 
     history.push(`/rooms/${roomCode}`);

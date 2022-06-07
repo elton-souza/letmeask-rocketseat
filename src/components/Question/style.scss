@@ -1,39 +1,116 @@
 .question {
-    background: #fefefe;
-    border-radius: 8px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-    padding: 24px;
+  background: #fefefe;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  padding: 24px;
 
-    & + .question {
-        margin-top:8px;
+  & + .question {
+    margin-top: 8px;
+  }
+
+  p {
+    color: #29292e;
+  }
+
+  &.highlighted {
+    border: 2px solid #835AFD;
+    box-shadow: 0px 2px 12px 0px #0000001F;
+  }
+
+  &.answered {
+    box-shadow: 0px 2px 12px 0px #0000000A;
+    background: #DBDCDD;
+    border:none
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 24px;
+
+    .user-info {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+      }
+
+      span {
+        margin-left: 8px;
+        color: #737380;
+        font-size: 14px;
+      }
     }
 
-    p {
-        color: #29292e;
-    }
+    .user-actions {
+      display: flex;
+      gap: 10px;
 
-    footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+      button {
+        border: 0;
+        background: transparent;
+        cursor: pointer;
 
-        margin-top: 24px;
+        &.like-button {
+          display: flex;
+          align-items: flex-end;
+          color: #737380;
+          gap: 8px;
 
-        .user-info {
-            display: flex;
-            align-items: center;
-            
-            img {
-              width: 32px;
-              height: 32px;
-              border-radius: 50%;
-            }
-  
-            span {
-              margin-left: 8px;
-              color: #737380;
-              font-size: 14px;
+          &.liked {
+            color: #835afd;
+
+            svg path {
+              stroke: #835afd;
             }
           }
+        }
+
+        &.answered-button {
+          &:hover {
+            svg circle,
+            path {
+              stroke: #835afd;
+            }
+          }
+
+          &.answered-active {
+            svg circle,
+            path {
+              stroke: #835afd;
+            }
+          }
+        }
+
+        &.highlighted-button {
+          &:hover {
+            svg path {
+              stroke: #835afd;
+            }
+          }
+
+          &.highlighted-active {
+            svg path {
+              stroke: #835afd;
+            }
+          }
+        }
+
+        &.trash-button:hover {
+          svg path {
+            stroke: #e73f5d;
+          }
+        }
+
+        &:hover {
+          filter: brightness(0.8);
+        }
+      }
     }
+  }
 }
